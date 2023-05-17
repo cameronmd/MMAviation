@@ -1,5 +1,6 @@
 ﻿namespace Mma.Common
 {
+    using System;
     using System.Text;
     using Mma.Common.models;
 
@@ -14,11 +15,33 @@
         {
             var result = new StringBuilder();
 
-            result.Append($"{windData.AverageWindDirection,000}");
+            if (windData.AverageWindDirection == null)
+            {
+                result.Append("///");
+            }
+            else
+            {
+                var roundedAvgWindDirection = RoundWindDirectionDown(windData.AverageWindDirection.Value);
+                result.Append($"{roundedAvgWindDirection:000}");
+            }
+
             result.Append($"{windData.AverageWindSpeed,00}");
-            result.Append("KT");
-            
+           
+            if (windData.AverageWindDirection == null)
+            {
+                result.Append("KY");
+            }
+            else
+            {
+                result.Append("KT");
+            }
+
             return result.ToString();
+        }
+
+        private int RoundWindDirectionDown(double windDirection)
+        {
+            return (int)(Math.Floor(windDirection / 10.0) * 10.0);
         }
     }
 }

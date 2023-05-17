@@ -32,7 +32,7 @@
 
             var result = formatter.FormatWind(data);
 
-            Assert.That(result, Is.EqualTo(expected));
+                Assert.That(result, Is.EqualTo(expected));
         }
 
     }
