@@ -155,6 +155,7 @@
         [TestCase(10, 10, 60, 50, null, "06010KT")]
         [TestCase(10, 10, 60, null , 90, "06010KT")]
         [TestCase(null, null, 60, 30, 90, "00000KT")]
+        [TestCase(5, 5, 400, 350, 450, "///05KT")]
         public void negative_scenarios_is_correct(double? aveSpeed, double? maxSpeed, double? aveDir, double? minDir, double? maxDir, string expected)
         {
             var data = new WindData
