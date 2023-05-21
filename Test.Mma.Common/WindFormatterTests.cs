@@ -147,5 +147,28 @@
 
             Assert.That(result, Is.EqualTo(expected));
         }
+
+        [TestCase(null, null, null, null, null, "00000KT")]
+        [TestCase(1, 1, null, null, null, "///01KT")]
+        [TestCase(10, 10, null, null, null, "///10KT")]
+        [TestCase(10, 10, 60, null, null, "06010KT")]
+        [TestCase(10, 10, 60, 50, null, "06010KT")]
+        [TestCase(10, 10, 60, null , 90, "06010KT")]
+        [TestCase(null, null, 60, 30, 90, "00000KT")]
+        public void negative_scenarios_is_correct(double? aveSpeed, double? maxSpeed, double? aveDir, double? minDir, double? maxDir, string expected)
+        {
+            var data = new WindData
+            {
+                AverageWindSpeed = aveSpeed,
+                MaximumWindSpeed = maxSpeed,
+                AverageWindDirection = aveDir,
+                MinimumWindDirection = minDir,
+                MaximumWindDirection = maxDir
+            };
+
+            var result = formatter.FormatWind(data);
+
+            Assert.That(result, Is.EqualTo(expected));
+        }
     }
 }

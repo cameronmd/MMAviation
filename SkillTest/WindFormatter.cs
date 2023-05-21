@@ -63,7 +63,7 @@
 
         private bool IsVariableWind(WindData windData)
         {
-            if (windData.MinimumWindDirection == null || windData.MaximumWindDirection == null)
+            if (windData.MinimumWindDirection == null || windData.MaximumWindDirection == null || windData.AverageWindSpeed == null)
             {
                 return false;
             }
@@ -83,6 +83,11 @@
 
         private bool IsDirectionVariation(WindData windData)
         {
+            if (windData.MaximumWindDirection == null || windData.MinimumWindDirection == null || windData.AverageWindSpeed == null)
+            {
+                return false;
+            }
+
             // Check to see if the direction variation is greater than 60 but less than 180
             var directionVariation = Math.Abs(windData.MaximumWindDirection.Value - windData.MinimumWindDirection.Value);
 
